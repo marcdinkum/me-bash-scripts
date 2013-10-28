@@ -1,0 +1,18 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen (c) 2011
+#
+TARGETDIR=stripped_flvs
+
+if [ -d $TARGETDIR ] ; then
+  echo "$TARGETDIR directory exists"
+else
+  echo "creating $TARGETDIR directory"
+  mkdir $TARGETDIR
+fi
+
+for f in *.flv; do
+  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .flv`.aac
+done
+

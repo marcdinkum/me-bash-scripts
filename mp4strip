@@ -1,0 +1,18 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen (c) 2011
+#
+TARGETDIR=stripped_mp4s
+
+if [ -d $TARGETDIR ] ; then
+  echo "$TARGETDIR directory exists"
+else
+  echo "creating $TARGETDIR directory"
+  mkdir $TARGETDIR
+fi
+
+for f in *.mp4; do
+  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .mp4`.aac
+done
+

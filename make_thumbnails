@@ -1,0 +1,22 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2004
+#
+
+
+if [ -d thumbnails ] ; then
+  echo "thumbnails directory exists"
+else
+  echo "creating thumbnails directory"
+  mkdir thumbnails
+fi
+
+#for f in *.png; do
+for f in *.jpg; do
+  echo thumbnailing $f
+  #target=`basename $f .png`.jpg
+  target=$f
+  convert -geometry 120x120 $f thumbnails/${target}
+done
+

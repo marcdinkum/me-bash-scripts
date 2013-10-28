@@ -1,0 +1,28 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2008
+#
+
+#
+# A script to convert all names to lowercase
+#
+
+echo
+echo "This command changes all uppercase in file names into lowercase"
+echo "  for ALL FILES IN THIS DIRECTORY !"
+echo "  Type ENTER to continue or ^C to quit"
+
+read dummy
+
+
+for f in *; do
+  oldname=`echo $f`
+  newname=`echo $f | tr [:upper:] [:lower:]`
+  if [ $oldname != $newname ]
+  then
+    echo mv $f $newname
+    mv "$f" $newname
+  fi
+done
+

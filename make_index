@@ -1,0 +1,36 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2004
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "make_index: make html index file"
+  echo
+  echo "usage: make_index <title> [ > file.html]"
+  echo "arguments: Title string"
+  echo
+  exit
+fi
+
+
+echo "<html>"
+echo "<head>"
+echo "<link rel=stylesheet href='../styles/dinkumstyle.css' type=text/css>"
+echo "<title>$1</title>"
+echo "</head>"
+echo "<body>"
+echo "<center>"
+echo "<h1>$1</h1>"
+
+for f in *.jpg ; do
+ echo "<a href='$f'><img hspace='50' src='thumbnails/$f'></a>"
+done
+
+echo "<br><a href='javascript:history.go(-1)'>Terug</a>"
+
+
+echo "</center>"
+echo "</body>"
+echo "</html>"
