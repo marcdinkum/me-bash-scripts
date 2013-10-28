@@ -1,3 +1,4 @@
+<code>
 me-bash-scripts
 ===============
 
@@ -52,4 +53,4 @@ pictupright
 png2jpg 
 make_thumbnails		
 make_index		Make HTML index with thumbnails linking to pictures
-
+</code>
