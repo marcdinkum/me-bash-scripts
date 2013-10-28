@@ -1,0 +1,28 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2008
+#
+
+#
+# retype: change file's extension. No more, no less
+#
+
+if [ $# -lt 2 ]; then
+  echo "retype: change extensions for all files with given extension"
+  echo
+  echo "usage: retype <old_extension> <new_extension>"
+  echo
+  exit
+fi
+
+
+OLD_EXT=$1
+NEW_EXT=$2
+
+
+for f in *.${OLD_EXT}; do
+  filebase=`basename $f .${OLD_EXT}`
+  mv $f ${filebase}.${NEW_EXT}
+done
+

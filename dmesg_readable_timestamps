@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+#
+# Marc Groenewegen 2013. Based on a trick I've seen somewhere but forgot
+#  where exactly...
+#
+
+	
+$uptime = `cat /proc/uptime | awk '{print $1}';`;
+$boot = time() - $uptime;
+chomp $boot;
+while (<STDIN>) {
+        if ($_ =~ /^\[([\s\d\.]+)\]/) {
+                $time_offset = $1;
+        }
+        $real_time = sprintf scalar localtime($boot + $time_offset);
+        $_ =~ s/\[[\s\d\.]+\]/\[$real_time\]/;
+        print $_;
+}
+

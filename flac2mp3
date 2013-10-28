@@ -1,0 +1,5 @@
+#! /bin/bash
+
+for f in *.flac; do
+  flac -c -d $f | lame - `basename $f .flac`.mp3
+done

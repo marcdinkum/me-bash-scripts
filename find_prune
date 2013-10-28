@@ -1,0 +1,15 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen, © 2013
+#
+
+echo "Stuff to find:"
+read TARGETS
+
+echo "Stuff NOT to find:"
+read EXCLUDES
+
+
+echo find . -iname $EXCLUDES -prune -o -iname $TARGETS -print
+

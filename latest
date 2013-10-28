@@ -1,0 +1,24 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen, © 2013
+#
+
+if [ $# -lt 1 ]; then
+  echo "latest: show all occurrences of filename, sorted old to new"
+  echo
+  echo "usage: latest <filename>"
+  echo
+  exit
+fi
+
+FILENAME=`basename $1`
+
+#
+# stat --format="%n %y" shows file name and last modification time
+#
+# sort -k <sort field>
+#
+find ${HOME} -iname $FILENAME -print | xargs stat --format="%n %y" | sort -k 2
+
+

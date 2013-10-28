@@ -1,0 +1,21 @@
+#! /bin/bash
+#
+# calculate the minutes in CD-time in a directory tree
+
+#
+# Marc Groenewegen © 2004
+#
+
+#
+# Modification for Mac, august 2008
+#
+
+#bytes=`du -bs . | awk 'BEGIN {FS=" "} {print $1}'`
+#minutes=`expr $bytes / 10584000`
+
+
+kbytes=`du -ks . | awk 'BEGIN {FS=" "} {print $1}'`
+minutes=`expr $kbytes / 10336`
+
+echo "$minutes minutes at 44100 kHz stereo WAV in this directory tree"
+

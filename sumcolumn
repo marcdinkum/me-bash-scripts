@@ -1,0 +1,16 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen, © 2013
+#
+
+# No arguments: print help
+if [ $# -lt 2 ]; then
+  echo "sumcolumn <file> <column>"
+  echo "Give total of given column in a tab-separated list"
+  exit
+fi
+
+awk  -v column=$2 'BEGIN {FS="\t+"; sum=0;} { sum+=$column }
+     END {print sum}' $1
+

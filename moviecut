@@ -1,0 +1,27 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2004
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "$0 infile from length outfile"
+  echo "from is specified as hh:mm:ss"
+  echo "length in seconds"
+  echo
+  exit
+fi
+
+
+
+INFILE=$1
+FROM=$2
+LENGTH=$3
+OUTFILE=$4
+NROFFRAMES=`expr $LENGTH \* 50`
+
+echo "Frames: $NROFFRAMES"
+
+ffmpeg -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+
