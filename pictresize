@@ -1,0 +1,35 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2004
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictresize: modify jpg dimensions"
+  echo
+  echo "usage: pictconvert <x> <y>"
+  echo "arguments: new x,y size"
+  echo
+  exit
+fi
+
+
+new_x=$1
+new_y=$2
+
+
+if [ -d converted ] ; then
+  echo "converted directory exists"
+else
+  echo "creating converted directory"
+  mkdir converted
+fi
+
+
+
+for f in *.jpg; do
+  echo converting $f
+  convert -geometry ${new_x}x${new_y} $f converted/$f
+done
+

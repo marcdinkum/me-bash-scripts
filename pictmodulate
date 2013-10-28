@@ -1,0 +1,32 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2007
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictmodulate: modulate all jpg"
+  echo "This controls brightness and saturation"
+  echo
+  echo "usage: pictmodulate"
+  echo
+  exit
+fi
+
+
+
+if [ -d converted ] ; then
+  echo "converted directory exists"
+else
+  echo "creating converted directory"
+  mkdir converted
+fi
+
+
+
+for f in *.jpg; do
+  echo converting $f
+  convert -modulate 120,160 $f converted/$f
+done
+

@@ -1,0 +1,54 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2004,2011
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictrename: create new names for a range of files"
+  echo
+  echo "usage: pictrename <newbasename> [start] [increment]"
+  echo "arguments:"
+  echo "* New base name"
+  echo "* Start of numbering (defaults to 1)"
+  echo "* Increment for file name numbering (defaults to 1)"
+  echo
+  exit
+fi
+
+
+newbasename=$1
+
+# defaults
+firstfile=1
+filenumber=1
+step=1;
+
+
+if [ $# -gt 1 ]; then
+  firstfile=$2
+  if [ $firstfile -gt 0 ]; then
+    filenumber=$firstfile
+    echo "Start numbering at $firstfile"
+  fi
+fi
+
+
+if [ $# -gt 2 ]; then
+  increment=$3
+  if [ $increment -gt 0 ]; then
+    step=$increment
+    echo "Step size: $step"
+  fi
+fi
+
+
+for f in *.jpg; do
+  numberstring=`printf %04d $filenumber`
+  echo "renaming $f to ${newbasename}_${numberstring}.jpg"
+  mv $f ${newbasename}_${numberstring}.jpg
+  #(( filenumber = filenumber + 1 ))  UNSAFE !!
+  filenumber=`expr $filenumber + $step`
+done
+

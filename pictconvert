@@ -1,0 +1,34 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2004
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictconvert: modify jpg quality"
+  echo
+  echo "usage: pictconvert <quality>"
+  echo "arguments: new jpeg quality"
+  echo
+  exit
+fi
+
+
+new_q=$1
+
+
+if [ -d converted ] ; then
+  echo "converted directory exists"
+else
+  echo "creating converted directory"
+  mkdir converted
+fi
+
+
+
+for f in *.jpg; do
+  echo converting $f
+  convert -quality $new_q $f converted/$f
+done
+

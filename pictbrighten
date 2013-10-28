@@ -1,0 +1,33 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2007
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictbrighten: brighten all jpg"
+  echo
+  echo "usage: pictbrighten <brightness %>"
+  echo
+  exit
+fi
+
+
+new_brightness=$1
+
+
+if [ -d converted ] ; then
+  echo "converted directory exists"
+else
+  echo "creating converted directory"
+  mkdir converted
+fi
+
+
+
+for f in *.jpg; do
+  echo converting $f
+  convert -modulate ${new_brightness} $f converted/$f
+done
+

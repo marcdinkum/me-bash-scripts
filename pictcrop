@@ -1,0 +1,36 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2007
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "pictcrop: crop png to width*height and top left corner x,y"
+  echo
+  echo "usage: pictcrop w h x y"
+  echo
+  exit
+fi
+
+
+new_w=$1
+new_h=$2
+new_x=$3
+new_y=$4
+
+
+if [ -d converted ] ; then
+  echo "converted directory exists"
+else
+  echo "creating converted directory"
+  mkdir converted
+fi
+
+
+
+for f in *.png; do
+  echo converting $f
+  convert -crop ${new_w}x${new_h}+${new_x}+${new_y} $f converted/$f
+done
+

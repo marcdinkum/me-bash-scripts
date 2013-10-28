@@ -1,0 +1,70 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2008
+#
+
+#
+# This script uses the EXIF orientation to turn pictures
+#
+
+# Orientation	Row 0		Column 0
+# ----------------------------------------
+# 1		top		left side
+# 2		top		right side
+# 3 		bottom		right side
+# 4		bottom		left side
+# 5		left side	top
+# 6		right side	top
+# 7		right side	bottom
+# 8		left side	bottom
+
+ 
+# Description by Adam M. Costello:
+#
+# For convenience, here is what the letter F would look like if it were
+#  tagged correctly and displayed by a program that ignores the orientation
+#  tag:
+#
+#      1        2       3      4         5            6           7          8
+#
+#    888888  888888      88  88      8888888888  88                  88  8888888888
+#    88          88      88  88      88  88      88  88          88  88      88  88
+#    8888      8888    8888  8888    88          8888888888  8888888888          88
+#    88          88      88  88
+#    88          88  888888  888888
+
+
+if [ -d turned ] ; then
+  echo "turned directory exists"
+else
+  echo "creating turned directory"
+  mkdir turned
+fi
+
+
+
+for f in *.jpg; do
+  echo "analysing $f"
+  #orientation=`identify -verbose $f | grep -i exif | \
+     #grep -i orientation | \
+     #awk 'BEGIN {FS=":"} {print substr($3,length($3))}'`
+  orientation=`identify -format '%[exif:orientation]' $f`
+  case $orientation in
+    "1")
+      echo "Normal orientation"
+    ;;
+    "6")
+      echo "Needs 90 degree turn"
+      convert -rotate 90 $f turned/$f
+    ;;
+    "8")
+      echo "Needs -90 degree turn"
+      convert -rotate -90 $f turned/$f
+    ;;
+    *)
+    echo "Don't know what to do with this"
+    ;;
+  esac
+done
+
