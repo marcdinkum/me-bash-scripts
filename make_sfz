@@ -1,0 +1,16 @@
+#! /bin/bash
+
+#
+# start from key
+key=37;
+
+for f in $1; do
+  echo "<region>"
+  echo "sample=$f"
+  echo "pitch_keycenter=$key"
+  key=`expr $key + 1`
+  echo "lokey=$key hikey=$key"
+  echo "lovel=0 hivel=50"
+  echo
+done
+

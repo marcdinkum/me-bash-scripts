@@ -1,0 +1,18 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2012
+#
+
+BASENAME=page
+NROFPAGES=188
+
+
+echo gs -sDEVICE=pdfwrite -q -dNOPAUSE -dBATCH -dSAFER \
+   -sOutputFile=merged.pdf "\\"
+
+for i in `seq 1 $NROFPAGES`;
+do
+  echo -n "$BASENAME${i}.pdf "
+done
+

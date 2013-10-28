@@ -1,0 +1,34 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2013
+#
+
+#
+# A script to change all tabs into 2 spaces
+#
+
+if [ $# -lt 1 ]; then
+  echo "metab: change all tabs into 2 spaces"
+  echo
+  echo "Usage:"
+  echo "Work one file: metab <filename>"
+  echo "Work all files in directory: metab -a"
+  exit
+fi
+
+if [ $1 == "-a" ]; then
+  echo "This command changes all tabs into 2 spaces"
+  echo "  for ALL FILES IN THIS DIRECTORY !"
+  echo "  Type ENTER to continue or ^C to quit"
+  read dummy
+  for f in *; do
+    sed -i 's/\t/  /g' $f
+  done
+  exit
+fi
+
+# -i option for 'in-place' so as not to overwrite the original
+#   as > would truncate the output file
+sed -i 's/\t/  /g' $1
+

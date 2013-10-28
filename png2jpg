@@ -1,0 +1,12 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2009
+#
+
+
+for f in *.png; do
+  echo converting $f
+  convert $f `basename $f .png`.jpg
+done
+

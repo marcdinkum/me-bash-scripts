@@ -1,0 +1,30 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2012
+#
+
+INFILE=even_188_130.pdf
+NROFSOURCEPAGES=30
+OFFSET=1
+PAGE=188
+STEP=2
+
+for i in `seq $OFFSET $NROFSOURCEPAGES`;
+do
+  echo "Processing source page $i, delivering page $PAGE"
+
+  gs -sDEVICE=pdfwrite \
+   -q -dNOPAUSE -dBATCH \
+   -sOutputFile=pages/page${PAGE}.pdf \
+   -dFirstPage=${i} \
+   -dLastPage=${i} \
+   $INFILE
+
+  PAGE=`bc << EOF
+    ${PAGE}-${STEP}
+    quit
+    EOF`
+
+done
+
