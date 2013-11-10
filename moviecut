@@ -19,9 +19,10 @@ INFILE=$1
 FROM=$2
 LENGTH=$3
 OUTFILE=$4
-NROFFRAMES=`expr $LENGTH \* 50`
+FRAMERATE=`get_framerate $1`
+NROFFRAMES=`expr $LENGTH \* $FRAMERATE`
 
 echo "Frames: $NROFFRAMES"
 
-ffmpeg -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+avconv -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
 

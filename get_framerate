@@ -1,0 +1,17 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2013
+#
+
+if [ $# -lt 1 ]; then
+  echo "$0 infile"
+  echo "Get video frame rate"
+  exit
+fi
+
+ffprobe $1 2>&1| grep fps |\
+  awk 'BEGIN {FS=","} {print $5}' |\
+  awk 'BEGIN {FS=" "} {print $1}'
+
+
