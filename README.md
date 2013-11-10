@@ -32,7 +32,8 @@ Various convenience scripts created by ME Groenewegen
 	webmstrip		keep only the audio of a webm file 
 
 	make_sfz 		create SFZ sample file
-	moviecut		uses ffmpeg to cut a piece out of a video file
+	moviecut		uses avconv to cut a piece out of a video file
+	get_framerate		reads the video frame rate from a video file
 
 	pdfgrep 
 	pdfmerge 
