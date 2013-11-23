@@ -4,6 +4,13 @@
 # Marc Groenewegen (c) 2011
 #
 
+if [ $# -eq 1 ] # convert the specified file only
+then
+  avconv -i $1 -acodec copy -vn `basename $1 .webm`.ogg
+  exit
+fi
+
+
 TARGETDIR=stripped_webm
 
 if [ -d $TARGETDIR ] ; then
@@ -14,7 +21,7 @@ else
 fi
 
 for f in *.webm; do
-  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .webm`.ogg
+  avconv -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .webm`.ogg
 done
 
 

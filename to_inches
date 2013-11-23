@@ -1,1 +1,38 @@
-metric_conversions
+#! /bin/bash
+
+#
+# Marc Groenewegen, © 2013
+#
+
+if [ $# -lt 1 ]; then
+  echo "Converts numbers to other units"
+  echo
+  echo "Supported conversions:"
+  echo "to_inches <centimeters>"
+  echo "to_cm <inches>"
+  echo "to_celcius <fahrenheit>"
+  echo "to_fahrenheit <celcius>"
+  exit
+fi
+
+case `basename $0` in
+  "to_inches")
+    CONVERSION="$1/2.54"
+  ;;
+  "to_cm")
+    CONVERSION="$1*2.54"
+  ;;
+  "to_celcius")
+    CONVERSION="($1-32)*5/9"
+  ;;
+  "to_fahrenheit")
+    CONVERSION="$1*9/5+32"
+  ;;
+esac
+
+bc << EOF
+scale=4
+${CONVERSION}
+quit
+EOF
+

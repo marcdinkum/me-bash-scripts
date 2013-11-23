@@ -3,6 +3,14 @@
 #
 # Marc Groenewegen (c) 2011
 #
+
+if [ $# -eq 1 ] # convert the specified file only
+then
+  avconv -i $1 -acodec copy -vn `basename $1 .mp4`.aac
+  exit
+fi
+
+
 TARGETDIR=stripped_mp4s
 
 if [ -d $TARGETDIR ] ; then
@@ -13,6 +21,6 @@ else
 fi
 
 for f in *.mp4; do
-  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .mp4`.aac
+  avconv -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .mp4`.aac
 done
 

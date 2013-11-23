@@ -3,6 +3,14 @@
 #
 # Marc Groenewegen (c) 2011
 #
+
+if [ $# -eq 1 ] # convert the specified file only
+then
+  avconv -i $1 -acodec copy -vn `basename $1 .flv`.aac
+  exit
+fi
+
+
 TARGETDIR=stripped_flvs
 
 if [ -d $TARGETDIR ] ; then
@@ -13,6 +21,6 @@ else
 fi
 
 for f in *.flv; do
-  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .flv`.aac
+  avconv -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .flv`.aac
 done
 
