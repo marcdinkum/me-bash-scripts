@@ -1,0 +1,37 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2013
+#
+
+#
+# A script to remove unwanted symbols from file names
+#
+
+echo
+echo "This command removes symbols from file names: single quotes, comma, brackets and spaces "
+echo "***  For ALL FILES IN THIS DIRECTORY ! ***"
+echo "  Type ENTER to continue or ^C to quit"
+
+read dummy
+
+for f in *; do
+  oldname=`echo $f | sed "s/'/~/g"`
+  oldname=`echo $oldname | sed "s/,/~/g"`
+  oldname=`echo $oldname | sed "s/(/~/g"`
+  oldname=`echo $oldname | sed "s/)/~/g"`
+  oldname=`echo $oldname | sed "s/ /~/g"`
+
+  newname=`echo $f | sed "s/'//g"`
+  newname=`echo $newname | sed "s/,//g"`
+  newname=`echo $newname | sed "s/(//g"`
+  newname=`echo $newname | sed "s/)//g"`
+  newname=`echo $newname | sed "s/ //g"`
+
+  if [ $oldname != $newname ]
+  then
+    echo mv $f $newname
+    mv "$f" $newname
+  fi
+done
+
