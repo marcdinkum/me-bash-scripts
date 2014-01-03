@@ -1,6 +1,7 @@
 #! /bin/bash
 
-bc << EOF
+# bc -l uses the standard math lib, see the bc man page
+bc -l << EOF
 scale=4
 $@
 quit
