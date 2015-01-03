@@ -24,16 +24,20 @@ Various convenience scripts created by ME Groenewegen
 	to_inches convert metric to/from imperial units 
 
 		## Audio/music ##
+	make_sfz 		create SFZ sample file (something like sf2 but useful)
 	aac2wav 	
+	aac2mp3 	
 	flac2mp3
 	cdminutes		calculate rough indication of minutes of WAV files
 	flvstrip		keep only the audio of an flv file 
 	mp4strip		keep only the audio of an mp4 file 
 	webmstrip		keep only the audio of a webm file 
 
-	make_sfz 		create SFZ sample file
-	moviecut		uses avconv to cut a piece out of a video file
+		## Video ##
+	moviecut		uses ffmpeg to cut a piece out of a video file
 	get_framerate		reads the video frame rate from a video file
+	edlplayer		shell around mplayer to create a file with EDL markers
+	edlextract		use EDL markers to extract fragments from a video file
 
 	pdfgrep 
 	pdfmerge 
