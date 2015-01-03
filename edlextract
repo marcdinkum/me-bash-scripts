@@ -7,7 +7,7 @@
 
 if [ $# -lt 1 ]; then
   echo "Extract fragment(s) from video file based on markers in edl file"
-  echo "$0 videofile"
+  echo "Usage: $0 videofile"
   echo
   echo "The name of the edl file is videofile.edl"
   exit

@@ -6,10 +6,11 @@
 
 
 if [ $# -lt 1 ]; then
-  echo "Write EDL markers from video file"
-  echo "$0 videofile"
-  echo
+  echo "Write EDL markers for video file"
+  echo "Usage: $0 videofile"
   echo "The name of the edl file is videofile.edl"
+  echo
+  echo "While playing, set markers with 'i' key"
   exit
 fi
 
