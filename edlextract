@@ -1,0 +1,45 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2015
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "Extract fragment(s) from video file based on markers in edl file"
+  echo "$0 videofile"
+  echo
+  echo "The name of the edl file is videofile.edl"
+  exit
+fi
+
+
+INFILE=$1
+EXTENSION="${INFILE##*.}"
+FILEBASENAME=`basename $INFILE .${EXTENSION}`
+EDL_FILE=${FILEBASENAME}.edl
+
+echo $EXTENSION
+echo $EDL_FILE
+
+FRAMERATE=`get_framerate $INFILE`
+
+INDEX=1
+
+cat $EDL_FILE |
+while read line; do
+  echo "Line: $line"
+  FROM=`echo $line | awk 'BEGIN {FS=" "} {print $1}'`
+  TO=`echo $line | awk 'BEGIN {FS=" "} {print $2}'`
+  LENGTH=`echo "$TO $FROM - p" | dc`
+  NROFFRAMES=`echo "$LENGTH $FRAMERATE * 1 / p" | dc`
+  OUTFILE=${FILEBASENAME}_${INDEX}.${EXTENSION}
+  echo "From: $FROM";
+  echo "To: $TO";
+  echo "Length: $LENGTH";
+  echo $NROFFRAMES
+  echo $OUTFILE
+  ffmpeg -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+  INDEX=`echo "$INDEX 1 + p" | dc`
+done
+

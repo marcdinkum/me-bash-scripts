@@ -6,18 +6,18 @@
 
 
 if [ $# -lt 1 ]; then
-  echo "pictcrop: crop png to width*height and top left corner x,y"
+  echo "pictcrop: crop png to top left corner x,y and width*height"
   echo
-  echo "usage: pictcrop w h x y"
+  echo "usage: pictcrop x y w h"
   echo
   exit
 fi
 
 
-new_w=$1
-new_h=$2
-new_x=$3
-new_y=$4
+new_x=$1
+new_y=$2
+new_w=$3
+new_h=$4
 
 
 if [ -d converted ] ; then

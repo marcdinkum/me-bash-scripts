@@ -20,9 +20,7 @@ FROM=$2
 LENGTH=$3
 OUTFILE=$4
 FRAMERATE=`get_framerate $1`
-NROFFRAMES=`expr $LENGTH \* $FRAMERATE`
+NROFFRAMES=`echo "$LENGTH $FRAMERATE * 1 / p" | dc`
 
-echo "Frames: $NROFFRAMES"
-
-avconv -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+ffmpeg -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
 

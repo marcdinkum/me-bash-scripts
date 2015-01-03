@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [ $# -gt 0 ]; then
+  ffmpeg -i $1 -f wav pipe:1 | lame - -b 256 `basename $1 .aac`.mp3
+  exit
+fi
+
+for f in *.aac; do
+  ffmpeg -i $f -f wav pipe:1 | lame - -b 256 `basename $f .aac`.mp3
+done
+

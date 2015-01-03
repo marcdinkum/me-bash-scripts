@@ -1,0 +1,23 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2015
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "Write EDL markers from video file"
+  echo "$0 videofile"
+  echo
+  echo "The name of the edl file is videofile.edl"
+  exit
+fi
+
+
+INFILE=$1
+EXTENSION="${INFILE##*.}"
+FILEBASENAME=`basename $INFILE .${EXTENSION}`
+EDL_FILE=${FILEBASENAME}.edl
+
+mplayer -edlout $EDL_FILE $INFILE
+

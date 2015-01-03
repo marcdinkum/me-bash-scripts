@@ -12,6 +12,8 @@ if [ $# -lt 1 ]; then
   echo "to_cm <inches>"
   echo "to_celcius <fahrenheit>"
   echo "to_fahrenheit <celcius>"
+  echo "to_db <ratio>"
+  echo "db_to_amp <ratio>"
   exit
 fi
 
@@ -28,9 +30,19 @@ case `basename $0` in
   "to_fahrenheit")
     CONVERSION="$1*9/5+32"
   ;;
+  "to_db")
+    CONVERSION="10*l($1)/l(10)" # 10*log(x)
+    # as we only have natural log we need to express 10log
+    #  as follows: 10log(x) = ln(x) / ln(10)
+  ;;
+  "db_to_amp")
+    CONVERSION="e(($1/10)*l(10))" # 10^(x/10)
+    # as we only have natural power we need to express 10^x with e^y
+    #   as follows: 10^x = e^(x * ln(10) )
+  ;;
 esac
 
-bc << EOF
+bc -l << EOF
 scale=4
 ${CONVERSION}
 quit
