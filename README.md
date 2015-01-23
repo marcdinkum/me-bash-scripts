@@ -3,6 +3,10 @@ me-bash-scripts
 
 Various convenience scripts created by ME Groenewegen
 
+N.B.: several media scripts rely on ffmpeg.
+Don't let Ubuntu warnings mislead you: ffmpeg is not dead. Feel free to
+modify the scripts for using avconv or install ffmpeg from http://ffmpeg.org
+
 	Miscellaneous
 	calc 
 	find_prune 	
