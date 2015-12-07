@@ -1,10 +1,17 @@
 #! /bin/bash
 
 #
-# Marc Groenewegen © 2011
+# Marc Groenewegen © 2015
 #
 
 TARGETDIR=wavs_from_aac
+
+
+if [ $# -gt 0 ]; then
+  ffmpeg -i $1 -f wav `basename $1 .aac`.wav
+  exit
+fi
+
 
 if [ -d $TARGETDIR ] ; then
   echo "$TARGETDIR directory exists"

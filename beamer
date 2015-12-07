@@ -1,0 +1,154 @@
+#! /bin/bash
+
+# 2015 Marc Groenewegen
+#
+# Empirical configure script for projectors
+# It works for me, hopefully it will also help others
+
+# xrandr -s 0 ---> reset to defaults
+# xrandr -s <resolution>
+
+# LVDS is Macbook display
+# DP is Display Port (Macbook)
+
+if [ $# -gt 0 ] && [ $1 == "-h" ]; then
+  echo "-f : forced (forces DP1 to default mode that always works)"
+  echo "-o : off"
+  echo "-s : screen (custom)"
+  echo "-k : kmt (custom)"
+  exit
+fi
+
+# Forced: Macbook Display Port (DP), works everywhere
+# N.B.: for other options just modify the script
+if [ $# -gt 0 ] && [ $1 == "-f" ]; then
+  if [ $# -gt 1 ]; then
+    echo "--FORCED with resolution $2--"
+    xrandr --addmode DP1 $2
+    xrandr --output DP1 --mode $2 --right-of LVDS1
+  else
+  echo "--FORCED--"
+    xrandr --addmode DP1 1024x768
+    xrandr --output DP1 --mode 1024x768 --same-as LVDS1
+    fi
+  exit
+fi
+
+# 1280x1024 custom
+if [ $# -gt 0 ] && [ $1 == "1280" ]; then
+  echo "--FORCED 1280x1024--"
+  # cvt 1280 1024
+  xrandr --newmode "1280" 109.00  1280 1368 1496 1712  1024 1027 1034 1063 -hsync +vsync
+  xrandr --addmode DP1 1280
+  xrandr --output DP1 --mode 1280
+  xrandr --output DP1 --right-of LVDS1
+  #xrandr --output DP1 --same-as LVDS1
+  #xrandr --delmode DP1 1131 # detach mode from output
+  #xrandr --rmmode 1131 # get rid of this mode
+  exit
+fi
+
+# Room 1131 custom
+if [ $# -gt 0 ] && [ $1 == "1131" ]; then
+  echo "--FORCED for room 1131--"
+  # cvt 1280 800
+  xrandr --newmode "1131" 83.50  1280 1352 1480 1680  800 803 809 831 -hsync +vsync
+  xrandr --addmode DP1 1131
+  xrandr --output DP1 --mode 1131
+  xrandr --output DP1 --right-of LVDS1
+  #xrandr --delmode DP1 1131 # detach mode from output
+  #xrandr --rmmode 1131 # get rid of this mode
+  exit
+fi
+
+
+# Room 1125 custom
+if [ $# -gt 0 ] && [ $1 == "1125" ]; then
+  echo "--FORCED for room 1125--"
+  # cvt 1280 800
+  xrandr --newmode "1125" 83.50  1280 1352 1480 1680  800 803 809 831 -hsync +vsync
+  xrandr --addmode DP1 1125
+  xrandr --output DP1 --mode 1125
+  xrandr --output DP1 --right-of LVDS1
+  #xrandr --delmode DP1 1125 # detach mode from output
+  #xrandr --rmmode 1125 # get rid of this mode
+  exit
+fi
+
+
+
+# Screen: custom mode
+if [ $# -gt 0 ] && [ $1 == "-s" ]; then
+  echo "--Screen--"
+  xrandr --output HDMI1 --mode 1680x1050
+  sleep 4
+  xrandr --output HDMI1 --right-of LVDS1
+  exit
+fi
+
+# Off: switch off DP1 and HDMI1
+if [ $# -gt 0 ] && [ $1 == "-o" ]; then
+  echo "--OFF--"
+  xrandr --output HDMI1 --off
+  xrandr --output DP1 --off
+  exit
+fi
+
+# Mirror
+if [ $# -gt 0 ] && [ $1 == "-m" ]; then
+  echo "--MIRROR--"
+  PLACEMENT="--same-as"
+else
+  PLACEMENT="--right-of"
+fi
+
+#
+# The more flexible solution: let the script search for connected devices
+# and offer a list to choose from. NB: if this fails to come up with
+# devices use the 'forced' option (see above)
+#
+
+NAMES=`xrandr | grep -w connected | awk 'BEGIN {FS=" "} {print $1}'`
+
+# array of output names, start with empty string to fill index 0
+OUTPUT=("" ${NAMES})
+
+# show the names with their indexes
+echo "Connected outputs"
+INDEX=1
+for O in ${OUTPUT[*]}; do
+  echo "$INDEX : $O"
+  (( INDEX = INDEX + 1 ))
+done
+
+((NROFOUTPUTS = INDEX - 1))
+
+
+echo "Where's the projector?"
+read INDEX
+
+if [ $INDEX -gt $NROFOUTPUTS ]; then
+  echo "Index too large"
+  exit
+fi
+
+echo "Where's the main screen?"
+read MAIN
+
+if [ $MAIN -gt $NROFOUTPUTS ]; then
+  echo "Index too large"
+  exit
+fi
+
+# Ad-hoc
+xrandr --output ${OUTPUT[$INDEX]} --mode 1024x768
+sleep 4
+xrandr --output ${OUTPUT[$INDEX]} --mode 1280x1024
+#xrandr --output ${OUTPUT[$INDEX]} --mode 1920x1080
+sleep 4
+echo xrandr --output ${OUTPUT[$INDEX]} ${PLACEMENT} ${OUTPUT[$MAIN]}
+xrandr --output ${OUTPUT[$INDEX]} ${PLACEMENT} ${OUTPUT[$MAIN]}
+
+# to switch projector off:
+#echo xrandr --output ${OUTPUT[$INDEX]} --off
+

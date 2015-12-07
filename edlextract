@@ -39,7 +39,7 @@ while read line; do
   echo "Length: $LENGTH";
   echo $NROFFRAMES
   echo $OUTFILE
-  ffmpeg -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+  avconv -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
   INDEX=`echo "$INDEX 1 + p" | dc`
 done
 

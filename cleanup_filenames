@@ -9,7 +9,8 @@
 #
 
 echo
-echo "This command removes symbols and spaces from file names"
+echo "This command removes symbols from file names"
+echo "Please run spaces2underscores.sh first!"
 echo "***  For ALL FILES IN THIS DIRECTORY ! ***"
 echo "  Type ENTER to continue or ^C to quit"
 
@@ -25,8 +26,9 @@ for f in *; do
   oldname=`echo $oldname | sed "s/(/~/g"`
   oldname=`echo $oldname | sed "s/)/~/g"`
   oldname=`echo $oldname | sed "s/ /~/g"`
+  oldname=`echo $oldname | sed "s/:/~/g"`
 
-  # remove those symbols
+  # remove/replace those symbols
   newname=`echo $f | sed "s/'//g"`
   newname=`echo $newname | sed "s/,//g"`
   newname=`echo $newname | sed "s/!//g"`
@@ -34,7 +36,7 @@ for f in *; do
   newname=`echo $newname | sed "s/@//g"`
   newname=`echo $newname | sed "s/(//g"`
   newname=`echo $newname | sed "s/)//g"`
-  newname=`echo $newname | sed "s/ //g"`
+  newname=`echo $newname | sed "s/:/./g"`
 
   if [ $oldname != $newname ] # apparent need for change
   then

@@ -45,7 +45,8 @@ modify the scripts for using avconv or install ffmpeg from http://ffmpeg.org
 
 	pdfgrep 
 	pdfmerge 
-	pdfsplit 
+	pdfsplit
+	txt2pdf			convert plain text files to PDF (needs a2ps)
 
 
 	# image manipulation scripts that work on an entire folder #

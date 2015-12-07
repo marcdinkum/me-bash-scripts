@@ -21,6 +21,7 @@ else
 fi
 
 for f in *.mp4; do
-  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .mp4`.aac
+  # ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .mp4`.aac
+  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/$(basename $f .mp4).aac
 done
 

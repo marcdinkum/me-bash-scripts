@@ -1,0 +1,10 @@
+#! /bin/bash
+
+FILE=$1
+
+# -R - portrait
+# -B no header
+# no borders
+
+/usr/bin/a2ps --columns 1 -R -B --borders off -o - $FILE | ps2pdf - `basename $FILE .txt`.pdf
+
