@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [ $# -gt 0 ]; then
+  ffmpeg -i $1 -f wav pipe:1 | lame - -b 320 `basename $1 .ogg`.mp3
+  exit
+fi
+
+for f in *.ogg; do
+  ffmpeg -i $f -f wav pipe:1 | lame - -b 320 `basename $f .ogg`.mp3
+done
+

@@ -1,0 +1,35 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2017
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "Convert images to monochrome"
+  echo
+  echo "usage:" `basename $0` "<filename|all>"
+  echo
+  exit
+fi
+
+
+
+if [ -d monochrome ] ; then
+  echo "monochrome directory exists"
+else
+  echo "creating monochrome directory"
+  mkdir monochrome
+fi
+
+
+if [ $1 != "all" ] # handle the specified file only
+then
+  # brightness,saturation,hue
+  convert -modulate 100,0,100 $1 monochrome/$1
+  exit
+fi
+
+
+find . -maxdepth 1 -type f \( -name \*.jpg -o -name \*.png \) -exec pictmono {} \;
+

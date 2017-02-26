@@ -1,0 +1,13 @@
+#! /bin/bash
+
+# convenience wrapper around lame
+
+if [ $# -gt 0 ]; then
+  lame -b 320 $1
+  exit
+fi
+
+
+for f in *.wav; do
+  lame -b 320 $f
+done
