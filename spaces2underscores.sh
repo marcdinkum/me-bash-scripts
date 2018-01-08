@@ -26,6 +26,7 @@ for f in *; do
   newname=`echo $newname | sed 's/ /_/g'`
   if [ $oldname != $newname ]
   then
+    echo mv "$f" $newname
     mv "$f" $newname
   fi
 done
