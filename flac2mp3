@@ -1,11 +1,11 @@
 #! /bin/bash
 
 if [ $# -gt 0 ]; then
-  flac -c -d $1 | lame - `basename $1 .flac`.mp3
+  flac -c -d $1 | lame - -b 320 `basename $1 .flac`.mp3
   exit
 fi
 
 
 for f in *.flac; do
-  flac -c -d $f | lame - `basename $f .flac`.mp3
+  flac -c -d $f | lame - -b 320 `basename $f .flac`.mp3
 done
