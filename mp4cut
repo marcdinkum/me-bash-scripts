@@ -1,0 +1,31 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2004-2019
+#
+
+
+if [ $# -lt 3 ]; then
+  echo "Cut a section from an mp4 file"
+  echo "$0 infile <from> <to> [outfile]"
+  echo "from and to are specified as hh:mm:ss"
+  echo "If no output file specified, the input filename is used with _CUT at the end"
+  echo
+  exit
+fi
+
+
+INFILE=$1
+FROM=$2
+TO=$3
+
+if [ $# -eq 4 ]; then
+  OUTFILE=$4
+else
+  OUTFILE=`basename ${INFILE} .mp4`_CUT.mp4
+fi
+
+echo $OUTFILE
+
+ffmpeg -i $INFILE -ss $FROM -to $TO -acodec copy -vcodec copy $OUTFILE
+

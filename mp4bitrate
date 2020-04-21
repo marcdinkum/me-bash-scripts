@@ -1,0 +1,17 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2020
+#
+
+
+if [ $# -lt 2 ]; then
+  echo "$0 <file> [maxrate]"
+  echo
+  echo "Example: $0 myvideo.mp4 2M"
+  exit
+fi
+
+# scaling probably works with ffmpeg as well...
+ffmpeg -i $1 -b:v $2 -maxrate $2 -bufsize 1M `basename $1 .mp4`_reduced.mp4
+

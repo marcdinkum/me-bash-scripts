@@ -6,7 +6,7 @@
 
 if [ $# -eq 1 ] # convert the specified file only
 then
-  avconv -i $1 -acodec copy -vn `basename $1 .mp4`.aac
+  ffmpeg -i $1 -acodec copy -vn `basename $1 .mp4`.aac
   exit
 fi
 

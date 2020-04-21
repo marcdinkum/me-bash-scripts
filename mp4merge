@@ -1,0 +1,27 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen (c) 2019
+#
+
+#
+# How to request the best quality audio and video?
+#
+# youtube-dl -F <URL>
+#
+# Then download using -f <format-number>
+#
+
+
+if [ $# -lt 2 ]
+then
+  echo "Specify video and audio file"
+  exit
+fi
+
+VIDEOFILE=$1
+AUDIOFILE=$2
+
+echo "Merging into output.mp4"
+ffmpeg -i ${VIDEOFILE} -i ${AUDIOFILE} -c:v copy -c:a copy output.mp4
+

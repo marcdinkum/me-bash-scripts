@@ -1,0 +1,20 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2017
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "$0 <file>"
+  echo
+  exit
+fi
+
+if [ $# -gt 1 ]; then
+  #FILTER="-metadata:s:v rotate=\"-90\""
+  FILTER="-vf \"transpose=1\" "
+fi
+
+ffmpeg -i $1 $FILTER `basename $1 .mp4`_rotated.mp4
+

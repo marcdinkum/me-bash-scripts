@@ -1,0 +1,15 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2018
+#
+
+if [ $# -lt 1 ]; then
+  echo "$0 infile"
+  echo "Get video length rate"
+  exit
+fi
+
+
+ffprobe -v error -select_streams v:0 -show_entries stream=duration -of csv=p=0 $1
+

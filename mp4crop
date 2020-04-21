@@ -1,0 +1,18 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2018
+#
+
+
+if [ $# -lt 3 ]; then
+  echo "$0 <file> <width> <height>"
+  echo
+  exit
+fi
+
+FILTER="crop=$2:$3:0:0"
+
+# scaling probably works with ffmpeg as well...
+ffmpeg -i $1 -filter:v "$FILTER" `basename $1 .mp4`_cropped.mp4
+
