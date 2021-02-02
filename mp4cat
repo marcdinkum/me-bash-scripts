@@ -1,0 +1,33 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2017
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "$0 outfile"
+  echo
+  echo concatenate all files in directory
+  echo
+  echo Remove previous output file before doing this!
+  exit
+fi
+
+OUTFILE=$1
+LISTFILE=mp4cat_file_list.txt
+
+# create new list
+echo "#file list" > $LISTFILE
+
+# add all mp4 files
+for f in *.mp4; do
+  echo "file '$f'" >> $LISTFILE
+done
+
+# cat all files
+ffmpeg -f concat -i $LISTFILE -c copy $OUTFILE
+
+# remove temporary file
+rm -f $LISTFILE
+

@@ -1,0 +1,22 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2020
+#
+
+
+if [ $# -lt 3 ]; then
+  echo "$0 <file> <width> <height>"
+  echo
+  echo "Set width and height of target"
+  exit
+fi
+
+if [ $# -gt 2 ]; then
+  WIDTH=$2
+  HEIGHT=$3
+fi
+
+# scaling probably works with ffmpeg as well...
+ffmpeg -i $1 -vf scale=${WIDTH}:${HEIGHT} `basename $1 .mp4`_scaled.mp4
+

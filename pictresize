@@ -33,3 +33,8 @@ for f in *.jpg; do
   convert -geometry ${new_x}x${new_y} $f converted/$f
 done
 
+for f in *.png; do
+  echo converting $f
+  convert -geometry ${new_x}x${new_y} $f converted/$f
+done
+

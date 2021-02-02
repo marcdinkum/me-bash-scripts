@@ -4,27 +4,26 @@
 # Marc Groenewegen © 2012
 #
 
-INFILE=even_188_130.pdf
-NROFSOURCEPAGES=30
+INFILE=$1
+NROFSOURCEPAGES=672
+#NROFSOURCEPAGES=24
 OFFSET=1
-PAGE=188
-STEP=2
+PAGE=1
+STEP=8
 
-for i in `seq $OFFSET $NROFSOURCEPAGES`;
+for i in `seq $OFFSET $STEP $NROFSOURCEPAGES`;
 do
-  echo "Processing source page $i, delivering page $PAGE"
+  echo "Processing source page $i"
+  LASTPAGE=$(( i + STEP - 1 ))
 
   gs -sDEVICE=pdfwrite \
    -q -dNOPAUSE -dBATCH \
    -sOutputFile=pages/page${PAGE}.pdf \
    -dFirstPage=${i} \
-   -dLastPage=${i} \
+   -dLastPage=${LASTPAGE} \
    $INFILE
 
-  PAGE=`bc << EOF
-    ${PAGE}-${STEP}
-    quit
-    EOF`
+  PAGE=$(( PAGE + 1 ))
 
 done
 

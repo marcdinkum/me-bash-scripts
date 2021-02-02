@@ -11,7 +11,7 @@ if [ $# -lt 1 ]; then
 fi
 
 ffprobe $1 2>&1| grep fps |\
-  awk 'BEGIN {FS=","} {print $5}' |\
+  awk 'BEGIN {FS=","} {print $6}' |\
   awk 'BEGIN {FS=" "} {print $1}'
 
 

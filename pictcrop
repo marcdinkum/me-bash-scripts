@@ -29,7 +29,7 @@ fi
 
 
 
-for f in *.png; do
+for f in *.jpg; do
   echo converting $f
   convert -crop ${new_w}x${new_h}+${new_x}+${new_y} $f converted/$f
 done

@@ -4,15 +4,20 @@
 # Marc Groenewegen © 2012
 #
 
-BASENAME=page
-NROFPAGES=188
+BASENAME=eval_oF
+NROFPAGES=18
 
+echo "Paste the output into a terminal to execute"
 
 echo gs -sDEVICE=pdfwrite -q -dNOPAUSE -dBATCH -dSAFER \
    -sOutputFile=merged.pdf "\\"
 
-for i in `seq 1 $NROFPAGES`;
+for filenumber in `seq 1 $NROFPAGES`;
 do
-  echo -n "$BASENAME${i}.pdf "
+  numberstring=`printf %04d $filenumber`
+  echo -n "$BASENAME${numberstring}.pdf "
 done
+
+# gs -sDEVICE=pdfwrite -q -dNOPAUSE -dBATCH -dSAFER
+#    -sOutputFile=merged.pdf <file1.pdf> <file2.pdf> ... <file n.pdf>
 
