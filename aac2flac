@@ -1,0 +1,26 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2015
+#
+
+TARGETDIR=wavs_from_aac
+
+
+if [ $# -gt 0 ]; then
+  ffmpeg -i $1 -f wav `basename $1 .aac`.wav
+  exit
+fi
+
+
+if [ -d $TARGETDIR ] ; then
+  echo "$TARGETDIR directory exists"
+else
+  echo "creating $TARGETDIR directory"
+  mkdir $TARGETDIR
+fi
+
+for f in *.aac; do
+  ffmpeg -i $f ${TARGETDIR}/`basename $f .aac`.wav
+done
+

@@ -20,5 +20,5 @@ EXTENSION="${INFILE##*.}"
 FILEBASENAME=`basename $INFILE .${EXTENSION}`
 EDL_FILE=${FILEBASENAME}.edl
 
-mplayer -edlout $EDL_FILE $INFILE
+${HOME}/software/mplayer-checkout-2016-01-31/mplayer -ao $AUDIO_DEV -edlout $EDL_FILE $INFILE
 

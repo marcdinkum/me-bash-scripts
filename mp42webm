@@ -1,0 +1,23 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2015
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "$0 <file> [scale]"
+  echo
+  exit
+fi
+
+if [ $# -gt 1 ]; then
+  SCALE=$2
+  FILTER="-filter:v scale=""iw*${SCALE}:ih*${SCALE}"""
+fi
+
+
+# ffmpeg can't find the vp8 codec but avconv can,
+#  so let's use avconv.. reluctantly
+avconv -i $1 $FILTER `basename $1 .mp4`.webm
+

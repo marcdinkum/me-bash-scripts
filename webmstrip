@@ -6,7 +6,7 @@
 
 if [ $# -eq 1 ] # convert the specified file only
 then
-  avconv -i $1 -acodec copy -vn `basename $1 .webm`.ogg
+  ffmpeg -i $1 -acodec copy -vn `basename $1 .webm`.ogg
   exit
 fi
 
@@ -21,7 +21,7 @@ else
 fi
 
 for f in *.webm; do
-  avconv -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .webm`.ogg
+  ffmpeg -i $f -acodec copy -vn ${TARGETDIR}/`basename $f .webm`.ogg
 done
 
 

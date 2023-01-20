@@ -18,11 +18,10 @@ fi
 echo "<html>"
 echo "<head>"
 echo "<style type='text/css'>"
-echo "body {background-color: white; font-family: Helvetica,sans-serif;\
-font-size: 14px; background: white; color: black;}"
+echo "body {background-color: #505050; color: #d0d0d0; font-family: Helvetica,sans-serif;\ font-size: 14px;}"
 echo "h1 {font-size: 3em; font-weight: normal; color: #c3c3c3;\
 letter-spacing: .01em; margin: 0 .05em 0 0; text-align: center; }"
-echo "img {border: 1px solid #d0d0d0;}"
+echo "img {border: 0px;}"
 echo "</style>"
 echo "<title>$1</title>"
 echo "</head>"
@@ -30,7 +29,7 @@ echo "<body>"
 echo "<center>"
 echo "<h1>$1</h1>"
 
-for f in *.jpg ; do
+for f in *.png ; do
  echo "<a href='$f'><img hspace='50' src='thumbnails/$f'></a>"
 done
 

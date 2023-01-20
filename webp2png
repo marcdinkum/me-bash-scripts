@@ -1,0 +1,25 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2021
+#
+
+echo "$0 : convert webp to png"
+echo
+echo "usage: $0"
+echo
+
+
+if [ -d from_webp ] ; then
+  echo "directory from_webp exists"
+else
+  echo "creating from_webp directory"
+  mkdir from_webp
+fi
+
+
+for f in *.webp; do
+  echo converting $f
+  dwebp $f -o from_webp/`basename $f .webp`.png
+done
+

@@ -1,0 +1,13 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2017
+#
+
+for f in *.pdf
+do
+  echo "Converting $f"
+  convert -crop 1120x150+60+1250 -density 150 $f -quality 100 `basename $f .pdf`.png
+  # convert -crop 1120x150+60+1250 `basename $f .pdf`.png `basename $f .pdf`_crop.png 
+done
+

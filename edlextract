@@ -26,20 +26,28 @@ FRAMERATE=`get_framerate $INFILE`
 
 INDEX=1
 
+#
+# Dec 2015 - apparently ffmpeg/avconv read from stdin, which caused a
+# problem in the loop because it took characters from the start of $line
+# Solution / hack: let ffmpeg read from a dummy file
+#
+
 cat $EDL_FILE |
-while read line; do
-  echo "Line: $line"
-  FROM=`echo $line | awk 'BEGIN {FS=" "} {print $1}'`
-  TO=`echo $line | awk 'BEGIN {FS=" "} {print $2}'`
+while read nextline; do
+  echo
+  echo
+  echo "Line: $nextline"
+  FROM=`echo $nextline | awk 'BEGIN {FS=" "} {print $1}'`
+  TO=`echo $nextline | awk 'BEGIN {FS=" "} {print $2}'`
   LENGTH=`echo "$TO $FROM - p" | dc`
   NROFFRAMES=`echo "$LENGTH $FRAMERATE * 1 / p" | dc`
   OUTFILE=${FILEBASENAME}_${INDEX}.${EXTENSION}
+  echo $OUTFILE
   echo "From: $FROM";
   echo "To: $TO";
   echo "Length: $LENGTH";
-  echo $NROFFRAMES
-  echo $OUTFILE
-  avconv -i $INFILE -ss $FROM -vframes $NROFFRAMES -acodec copy -vcodec copy $OUTFILE
+  echo "Nr of frames: $NROFFRAMES"
+  ffmpeg -ss $FROM -i $INFILE -frames:v $NROFFRAMES -acodec copy -vcodec copy $OUTFILE < /dev/null
   INDEX=`echo "$INDEX 1 + p" | dc`
 done
 

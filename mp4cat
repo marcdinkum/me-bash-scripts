@@ -8,7 +8,7 @@
 if [ $# -lt 1 ]; then
   echo "$0 outfile"
   echo
-  echo concatenate all files in directory
+  echo concatenate ALL .mp4 files in directory
   echo
   echo Remove previous output file before doing this!
   exit

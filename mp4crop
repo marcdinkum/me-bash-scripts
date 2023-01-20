@@ -11,7 +11,7 @@ if [ $# -lt 3 ]; then
   exit
 fi
 
-FILTER="crop=$2:$3:0:0"
+FILTER="crop=$2:$3:520:0"
 
 # scaling probably works with ffmpeg as well...
 ffmpeg -i $1 -filter:v "$FILTER" `basename $1 .mp4`_cropped.mp4

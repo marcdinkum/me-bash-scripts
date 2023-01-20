@@ -2,7 +2,7 @@
 
 #
 # start from key
-key=37;
+key=25;
 
 for f in $1; do
   echo "<region>"
@@ -10,7 +10,7 @@ for f in $1; do
   echo "pitch_keycenter=$key"
   key=`expr $key + 1`
   echo "lokey=$key hikey=$key"
-  echo "lovel=0 hivel=50"
+  echo "lovel=0 hivel=127"
   echo
 done
 
