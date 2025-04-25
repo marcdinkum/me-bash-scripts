@@ -1,0 +1,18 @@
+#! /bin/sh
+
+#
+# Marc Groenewegen © 2019
+#
+
+
+if [ $# -eq 1 ] # process the specified file only
+then
+  convert $1 `basename $1 .jpg`.png
+  exit
+fi
+
+for f in *.jpg; do
+  echo converting $f
+  convert $f `basename $f .jpg`.png
+done
+

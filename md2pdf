@@ -1,0 +1,30 @@
+#! /bin/bash
+
+FILE=$1
+
+#
+# English
+#
+# /usr/bin/pandoc -V fontsize=12pt -o `basename $FILE .md`.pdf $FILE
+
+#
+# font sizes over 12pt are not supported by the standard
+#  latex article document class
+#
+# Instead, put the following line in pandoc.yaml
+#
+# documentclass: extarticle
+#
+# According to 
+# https://stackoverflow.com/questions/23811002/ \
+#    from-markdown-to-pdf-how-to-change-the-font-size-with-pandoc
+# possible sizes then are 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+#
+
+
+#
+# Dutch
+#
+# alternative: geometry:margin=1cm 
+/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V lang=nl -V fontsize=12pt -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
+

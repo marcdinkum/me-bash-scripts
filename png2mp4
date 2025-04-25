@@ -1,0 +1,21 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2018
+#
+
+
+if [ $# -lt 3 ]; then
+  echo "$0 pngfile mp4file duration (seconds)"
+  echo
+  echo Create an mp4 file from one PNG image
+  echo
+  exit
+fi
+
+PNGFILE=$1
+OUTFILE=$2
+DURATION=$3
+
+ffmpeg -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -loop 1 -i $PNGFILE -shortest -c:v libx264 -t $DURATION -pix_fmt yuv420p $OUTFILE
+

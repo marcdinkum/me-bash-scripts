@@ -7,7 +7,7 @@
 if [ $# -lt 1 ]; then
   echo "pictcrop: crop png to top left corner x,y and width*height"
   echo
-  echo "usage: pictcrop x y w h"
+  echo "usage: pictcrop x y w h [file]"
   echo
   exit
 fi
@@ -16,6 +16,8 @@ new_x=$1
 new_y=$2
 new_w=$3
 new_h=$4
+f=$5
+
 
 if [ -d converted ] ; then
   echo "converted directory exists"
@@ -25,9 +27,15 @@ else
 fi
 
 
+if [ $# -eq 5 ] # process the specified file only
+then
+  convert -crop ${new_w}x${new_h}+${new_x}+${new_y} $f converted/$f
+  exit
+fi
+
+
 for f in *.jpg; do
   echo converting $f
-  #convert -crop ${new_w}x${new_h}+${new_x}+${new_y} $f converted/$f
-  convert -crop 50%x50%+1000+1000  $f converted/$f
+  convert -crop ${new_w}x${new_h}+${new_x}+${new_y} $f converted/$f
 done
 
