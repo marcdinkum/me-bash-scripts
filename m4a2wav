@@ -1,0 +1,11 @@
+#! /bin/bash
+
+if [ $# -gt 0 ]; then
+  ffmpeg -i $1 `basename $1 .m4a`.wav
+  exit
+else
+  for f in *.m4a; do
+    m4a2wav $f
+  done
+fi
+

@@ -5,9 +5,10 @@
 if [ $# -gt 0 ]; then
   lame -b 320 $1
   exit
+else
+  for f in *.wav; do
+    wav2mp3 $f
+  done
 fi
 
 
-for f in *.wav; do
-  lame -b 320 $f
-done

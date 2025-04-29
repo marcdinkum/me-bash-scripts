@@ -1,0 +1,16 @@
+#! /bin/bash
+
+#
+# Marc Groenewegen © 2021
+#
+
+
+if [ $# -lt 1 ]; then
+  echo "$0 <file>"
+  echo
+  exit
+fi
+
+
+ffmpeg -i $1 -c copy `basename $1 .mkv`.mp4
+
