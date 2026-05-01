@@ -1,30 +1,38 @@
 #! /bin/bash
 
+
+if [ $# -lt 1 ]; then
+  echo "Convert markdown to pdf"
+  echo "Usage: $0 <markdown.md> [fontsize (default 14)]"
+  echo
+  echo "fontsize can be 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt"
+  exit
+fi
+
+
 FILE=$1
+FONTSIZE="14pt"
+
+if [ $# -gt 1 ]; then
+  FONTSIZE=`basename $2 pt`pt
+  echo $FONTSIZE
+fi
+
 
 #
-# English
-#
-# /usr/bin/pandoc -V fontsize=12pt -o `basename $FILE .md`.pdf $FILE
-
-#
-# font sizes over 12pt are not supported by the standard
-#  latex article document class
-#
+# font sizes over 12pt are not supported by the standard latex article document class
 # Instead, put the following line in pandoc.yaml
 #
 # documentclass: extarticle
 #
-# According to 
-# https://stackoverflow.com/questions/23811002/ \
-#    from-markdown-to-pdf-how-to-change-the-font-size-with-pandoc
-# possible sizes then are 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+# Possible sizes then are 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+# According to https://stackoverflow.com/questions/23811002/from-markdown-to-pdf-how-to-change-the-font-size-with-pandoc
 #
-
-
 #
-# Dutch
+# English: lang=en
+# Dutch: lang=nl
 #
 # alternative: geometry:margin=1cm 
-/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V lang=nl -V fontsize=12pt -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
+
+/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V lang=nl -V fontsize=${FONTSIZE} -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
 

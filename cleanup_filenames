@@ -20,6 +20,7 @@ for f in *; do
   # replace symbols by ~ for comparison
   oldname=`echo $f | sed "s/'/~/g"`
   oldname=`echo $oldname | sed "s/,/~/g"`
+  oldname=`echo $oldname | sed "s/;/~/g"`
   oldname=`echo $oldname | sed "s/!/~/g"`
   oldname=`echo $oldname | sed "s/&/~/g"`
   oldname=`echo $oldname | sed "s/@/~/g"`
@@ -35,10 +36,13 @@ for f in *; do
   oldname=`echo $oldname | sed "s/__/~/g"`
   oldname=`echo $oldname | sed "s/_\./~/g"`
   oldname=`echo $oldname | sed "s/\._/~/g"`
+  oldname=`echo $oldname | sed "s/\?/~/g"`
+  oldname=`echo $oldname | sed "s/=/~/g"`
 
   # remove/replace those symbols
   newname=`echo $f | sed "s/'//g"`
   newname=`echo $newname | sed "s/,//g"`
+  newname=`echo $newname | sed "s/;/_/g"`
   newname=`echo $newname | sed "s/!//g"`
   newname=`echo $newname | sed "s/&//g"`
   newname=`echo $newname | sed "s/@//g"`
@@ -53,6 +57,8 @@ for f in *; do
   newname=`echo $newname | sed "s/__/-/g"`
   newname=`echo $newname | sed "s/_\./-/g"`
   newname=`echo $newname | sed "s/\._/-/g"`
+  newname=`echo $newname | sed "s/\?/_/g"`
+  newname=`echo $newname | sed "s/=/-/g"`
 
   if [ $oldname != $newname ] # apparent need for change
   then
