@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# https://www.ostechnix.com/how-to-check-laptop-battery-status-in-terminal-in-linux
+# upower
+# acpi
+# cat /sys/class/power_supply/BAT0/capacity
+# cat /sys/class/power_supply/AC/......
+# cat /sys/class/power_supply/AC/online (charging=1 otherwise 0)
+
+POWER=`cat /sys/class/power_supply/BAT0/capacity`
+echo $POWER
+
+AC_CONNECTED=`cat /sys/class/power_supply/AC/online`
+
+if [ $AC_CONNECTED -gt 0 ]; then
+  echo "Charging"
+else
+  echo "Not charging"
+fi
+
+
+
+

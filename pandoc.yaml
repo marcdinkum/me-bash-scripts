@@ -1,0 +1,10 @@
+geometry:
+- top=15mm
+- left=15mm
+- heightrounded
+
+pagestyle:
+- empty
+
+documentclass: extarticle
+

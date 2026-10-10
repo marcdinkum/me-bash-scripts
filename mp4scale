@@ -16,6 +16,5 @@ if [ $# -gt 1 ]; then
   FILTER="-filter:v scale=""iw*${SCALE}:ih*${SCALE}"""
 fi
 
-# scaling probably works with ffmpeg as well...
 ffmpeg -i $1 $FILTER `basename $1 .mp4`_scaled.mp4
 

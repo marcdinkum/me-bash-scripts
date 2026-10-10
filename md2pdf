@@ -33,6 +33,11 @@ fi
 # Dutch: lang=nl
 #
 # alternative: geometry:margin=1cm 
+#
+# -V geometry:landscape
+#
 
-/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V lang=nl -V fontsize=${FONTSIZE} -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
+#/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V lang=nl -V fontsize=${FONTSIZE} -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
+
+/usr/bin/pandoc --tab-stop=8 --metadata-file=${HOME}/scripts/pandoc.yaml -V fontsize=${FONTSIZE} -V geometry:"left=2cm,top=1cm,bottom=1cm" -o `basename $FILE .md`.pdf $FILE
 
